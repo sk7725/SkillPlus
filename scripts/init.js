@@ -1,5 +1,5 @@
 //var ui = require("ui-lib/library");
-const damagedColor = Color.valueOf("ff9999");
+const damagedColor = Color.valueOf("ffa5a5");
 
 if (typeof(drawrect)== "undefined"){
   const drawrect = method => new Packages.arc.scene.ui.layout.Table.DrawRect(){get : method};
