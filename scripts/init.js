@@ -70,6 +70,77 @@ const hpring = extend(Packages.arc.scene.style.Drawable, {
     Draw.reset();
   }
 });
+
+var t = this;
+
+const hpskillring = extend(Packages.arc.scene.style.Drawable, {
+  last:1,
+  last2:1,
+  lastframe:0,
+  hpscl(f){
+  	this.last = Mathf.lerp(this.last, f, 0.1);
+  	return this.last;
+  },
+  skillscl(f){
+  	this.last2 = Mathf.lerp(this.last, f, 0.05);
+  	return this.last2;
+  },
+  draw(x, y, w, h){
+    var hp = Vars.player.health()/Vars.player.maxHealth();
+    if(hp < 0.00001) return;
+
+    var skill = null;
+    var cd = 0;
+    try{
+      if(t.global.skilltile != null) skill = Vars.world.tile(t.global.skilltile).ent().skill();
+
+      if(skill != null && skill.skill != ""){
+        var cool = t.global.skills.skills[skill.skill].cooltime*60;
+        cd = 1 - (cool + skill.lastused - Time.time())/cool;
+      }
+    }
+    catch(err){
+      skill = null;
+      cd = 0;
+    }
+
+    if(!Mathf.equal(hp, this.last) || !Mathf.equal(cd, this.last2)) this.lastframe = Time.time();
+    var scl = this.hpscl(hp);
+
+
+    var a = (60 - (Time.time() - this.lastframe))/60;
+    if(a <= 0.4) a = 0.4;
+    Lines.stroke(8);
+    //print("trydraw "+w/2+", "+h/2);
+    var cv = Core.input.mouseScreen(Vars.player.getX(),Vars.player.getY());
+    Draw.color(Color.darkGray, a);
+    Lines.polySeg(360, -50, 170, cv.x, cv.y, 64, 0);
+    Lines.polySeg(360, 190, 290, cv.x, cv.y, 64, 0);
+    if(hp < scl){
+      Draw.color(damagedColor, a);
+      Lines.polySeg(360, 220*hp-50, 220*scl-50, cv.x, cv.y, 64, 0);
+    }
+    else this.last = hp;
+
+    Draw.color(Pal.health, a);
+    Lines.polySeg(360, -50, 220*hp-50, cv.x, cv.y, 64, 0);
+
+    if(skill != null && skill.skill != ""){
+      var scl2 = this.skillscl(cd);
+      if(cd < scl2){
+        Draw.color(Pal.accent, a);
+        Lines.polySeg(360, 100*cd+190, 100*scl2+190, cv.x, cv.y, 64, 0);
+      }
+      else this.last2 = cd;
+
+      Draw.color(Pal.heal, a);
+      Lines.polySeg(360, 190, 100*cd+190, cv.x, cv.y, 64, 0);
+    }
+    Lines.stroke(1);
+    Draw.color();
+    Draw.reset();
+  }
+});
 /*
 var last = 0;
 
@@ -89,7 +160,7 @@ if (!this.global.skillPlusUI) {
     //const d = new Packages.arc.scene.ui.layout.Table.DrawRect();
     //d.draw()
 		t.setFillParent(true);
-    t.addImage(hpring);
+    t.addImage(hpskillring);
 		t.visible(boolp(() => Vars.state.state == GameState.State.playing));
 		//t.defaults().width(Core.graphics.getWidth()).height(Core.graphics.getHeight());
 
