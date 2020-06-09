@@ -41,9 +41,9 @@ if(!this.global.skillPlusUI){
 const hpring = extend(Packages.arc.scene.style.Drawable, {
   draw(x, y, w, h){
     Draw.color(Color.valueOf("ff0000"));
-    Lines.stroke(3);
+    Lines.stroke(8);
     //print("trydraw "+w/2+", "+h/2);
-    Lines.polySeg(360, 0, 360*(Vars.player.health()/Vars.player.maxHealth()), Vars.player.getX(), Vars.player.getY(), 11, 0);
+    Lines.polySeg(360, 0, 360*(Vars.player.health()/Vars.player.maxHealth()), Core.graphics.getWidth()/2, Core.graphics.getHeight()/2, 64, 0);
     Lines.stroke(1);
     Draw.color();
     Draw.reset();
@@ -70,7 +70,7 @@ if (!this.global.skillPlusUI) {
 		t.setFillParent(true);
     t.addImage(hpring);
 		t.visible(boolp(() => Vars.state.state == GameState.State.playing));
-		t.defaults().width(Core.graphics.getWidth()).height(Core.graphics.getHeight());
+		//t.defaults().width(Core.graphics.getWidth()).height(Core.graphics.getHeight());
 
 		Core.scene.add(t);
 	}));
