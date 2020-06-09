@@ -37,6 +37,19 @@ if(!this.global.skillPlusUI){
 	}));
 }
 */
+
+const hpring = extendContent(Packages.arc.scene.style.BaseDrawable, "HPRingDrawable", {
+  draw(x, y, w, h){
+    Draw.color(Color.valueOf("ff0000"));
+    Lines.stroke(3);
+    //print("trydraw "+w/2+", "+h/2);
+    Lines.polySeg(360, 0, 360*(Vars.player.health()/Vars.player.maxHealth()), Vars.player.getX(), Vars.player.getY(), 11, 0);
+    Lines.stroke(1);
+    Draw.color();
+    Draw.reset();
+  }
+});
+/*
 var last = 0;
 
 const hpring = () => {
@@ -44,7 +57,7 @@ const hpring = () => {
 	const avg = Mathf.lerp(hp, last, 1/60);
 	last = hp;
 	return avg;
-};
+};*/
 
 // Prevent adding multiple speedometers
 if (!this.global.skillPlusUI) {
@@ -52,19 +65,10 @@ if (!this.global.skillPlusUI) {
 
 	Events.on(EventType.ClientLoadEvent, run(e => {
 		const t = new Table();
+    const d = new Packages.arc.scene.ui.layout.Table.DrawRect();
+    d.draw()
 		t.setFillParent(true);
-    t.addRect(drawrect((x, y, width, height)=>{
-      Draw.rect(Core.atlas.find("router"), Vars.player.getX(), Vars.player.getY())
-      /*
-      Draw.color(Color.valueOf("ff0000"));
-      Lines.stroke(3);
-      //print("trydraw "+w/2+", "+h/2);
-      Lines.polySeg(360, 0, 360*(Vars.player.health()/Vars.player.maxHealth()), Vars.player.getX(), Vars.player.getY(), 11, 0);
-      Lines.stroke(1);
-      Draw.color();
-      Draw.reset();
-      */
-    })).grow();
+    t.addRect(hpring).grow();
 		t.visible(boolp(() => Vars.state.state == GameState.State.playing));
 		t.defaults().width(Core.graphics.getWidth()).height(Core.graphics.getHeight());
 
