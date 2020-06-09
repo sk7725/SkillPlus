@@ -106,7 +106,7 @@ const hpskillring = extend(Packages.arc.scene.style.Drawable, {
       cd = 0;
     }
 
-    if(!Mathf.equal(hp, this.last) || !Mathf.equal(cd, this.last2)) this.lastframe = Time.time();
+    if(!Mathf.equal(hp, this.last) || (skill != null && skill.skill != "" && !Mathf.equal(cd, 1))) this.lastframe = Time.time();
     var scl = this.hpscl(hp);
 
 
