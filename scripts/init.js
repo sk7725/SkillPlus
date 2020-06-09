@@ -48,6 +48,7 @@ const hpring = extend(Packages.arc.scene.style.Drawable, {
   draw(x, y, w, h){
     var hp = Vars.player.health()/Vars.player.maxHealth();
     var scl = this.hpscl(hp);
+    if(hp>0.99999) return;
     if(Mathf.equal(hp, scl) && hp < 0.9999) this.lastframe = Time.time();
     var a = (60 - (Time.time() - this.lastframe))/60;
     if(a <= 0) return;
