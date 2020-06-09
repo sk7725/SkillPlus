@@ -1,7 +1,7 @@
 var ui = require("ui-lib/library");
 
 if (typeof(drawrect)== "undefined"){
-  const drawrect = method => new DrawRect(){get : method};
+  const drawrect = method => new Packages.arc.scene.ui.layout.Table.DrawRect(){get : method};
 }
 
 ui.once(() => {
