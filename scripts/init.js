@@ -18,13 +18,13 @@ if(!this.global.skillPlusUI){
           h = Core.graphics.getHeight();
           Draw.color(Color.valueOf("ff0000"));
           Lines.stroke(3);
-          //print("trydraw");
+          print("trydraw "+w/2+", "+h/2);
           Lines.polySeg(360, 0, (360/Vars.player.maxHealth())*Vars.player.health(), w/2, h/2, 11, 0);
           Lines.stroke(1);
           Draw.color();
           Draw.reset();
   			}));
-        elem.visible(boolp(()=>!Vars.state.is(GameState.State.menu)));
+        elem.visible(boolp(()=>true));
         elem.update(run(() => {
           elem.setFillParent(true);
           elem.setBounds(0, 0, Core.graphics.getWidth(), Core.graphics.getHeight());
