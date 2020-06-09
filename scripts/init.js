@@ -82,7 +82,7 @@ const hpskillring = extend(Packages.arc.scene.style.Drawable, {
   	return this.last;
   },
   skillscl(f){
-  	this.last2 = Mathf.lerp(this.last, f, 0.05);
+  	this.last2 = Mathf.lerp(this.last2, f, 0.05);
   	return this.last2;
   },
   draw(x, y, w, h){
@@ -97,6 +97,8 @@ const hpskillring = extend(Packages.arc.scene.style.Drawable, {
       if(skill != null && skill.skill != ""){
         var cool = t.global.skills.skills[skill.skill].cooltime*60;
         cd = 1 - (cool + skill.lastused - Time.time())/cool;
+        if(cd<0) cd = 0;
+        if(cd>1) cd = 1;
       }
     }
     catch(err){
