@@ -54,6 +54,8 @@ if (!this.global.skillPlusUI) {
 		const t = new Table();
 		t.setFillParent(true);
     t.addRect(drawrect((x, y, width, height)=>{
+      Draw.rect(Core.atlas.find("router"), Vars.player.getX(), Vars.player.getY())
+      /*
       Draw.color(Color.valueOf("ff0000"));
       Lines.stroke(3);
       //print("trydraw "+w/2+", "+h/2);
@@ -61,6 +63,7 @@ if (!this.global.skillPlusUI) {
       Lines.stroke(1);
       Draw.color();
       Draw.reset();
+      */
     })).grow();
 		t.visible(boolp(() => Vars.state.state == GameState.State.playing));
 		t.defaults().width(Core.graphics.getWidth()).height(Core.graphics.getHeight());
