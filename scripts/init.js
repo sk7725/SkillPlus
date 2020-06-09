@@ -43,7 +43,8 @@ const hpring = extend(Packages.arc.scene.style.Drawable, {
     Draw.color(Color.valueOf("ff0000"));
     Lines.stroke(8);
     //print("trydraw "+w/2+", "+h/2);
-    Lines.polySeg(360, 0, 360*(Vars.player.health()/Vars.player.maxHealth()), Core.graphics.getWidth()/2, Core.graphics.getHeight()/2, 64, 0);
+    var cv = Core.input.mouseScreen(Vars.player.getX(),Vars.player.getY());
+    Lines.polySeg(360, 0, 360*(Vars.player.health()/Vars.player.maxHealth()), cv.x, cv.y, 64, 0);
     Lines.stroke(1);
     Draw.color();
     Draw.reset();
