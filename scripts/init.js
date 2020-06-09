@@ -14,11 +14,11 @@ ui.once(() => {
         var cy = Core.graphics.getHeight()/2;
         Draw.color(Color.valueOf("ff0000"));
         Lines.stroke(3);
-        Lines.polySeg(360, 0, (360/Vars.player.maxHealth())*Vars.player.health(), Vars.player.getX(), Vars.player.getY(), 11, 0);
+        Lines.polySeg(360, 0, (360/Vars.player.maxHealth())*Vars.player.health(), cx, cy, 11, 0);
         Lines.stroke(1);
         Draw.color();
 			}));
-      elem.visible(boolp(()=>Vars.state.is(GameState.State.menu)));
+      elem.visible(boolp(()=>!Vars.state.is(GameState.State.menu)));
       elem.update(run(() => {
 
       }));
