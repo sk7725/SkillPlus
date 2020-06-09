@@ -19,7 +19,7 @@ if(!this.global.skillPlusUI){
           Draw.color(Color.valueOf("ff0000"));
           Lines.stroke(3);
           //print("trydraw");
-          Lines.polySeg(360, 0, (360/Vars.player.maxHealth())*Vars.player.health(), x, y, 11, 0);
+          Lines.polySeg(360, 0, (360/Vars.player.maxHealth())*Vars.player.health(), w/2, h/2, 11, 0);
           Lines.stroke(1);
           Draw.color();
           Draw.reset();
