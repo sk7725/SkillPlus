@@ -53,7 +53,7 @@ if (!this.global.skillPlusUI) {
 	Events.on(EventType.ClientLoadEvent, run(e => {
 		const t = new Table();
 		t.setFillParent(true);
-    t.rect(drawrect((x, y, width, height)=>{
+    t.addRect(drawrect((x, y, width, height)=>{
       Draw.color(Color.valueOf("ff0000"));
       Lines.stroke(3);
       //print("trydraw "+w/2+", "+h/2);
