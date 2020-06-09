@@ -38,7 +38,7 @@ if(!this.global.skillPlusUI){
 }
 */
 
-const hpring = extendContent(Packages.arc.scene.style.BaseDrawable, "HPRingDrawable", {
+const hpring = extend(Packages.arc.scene.style.Drawable, {
   draw(x, y, w, h){
     Draw.color(Color.valueOf("ff0000"));
     Lines.stroke(3);
