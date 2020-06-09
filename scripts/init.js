@@ -6,22 +6,26 @@ if (typeof(drawrect)== "undefined"){
 }
 
 ui.once(() => {
+  print("loading start!");
   frag = extend(Fragment, {
 		build(parent) {
 
 			elem = parent.fill(drawrect((x, y, w, h)=>{
         //Draw goes here
-        var cx = Core.graphics.getWidth()/2;
-        var cy = Core.graphics.getHeight()/2;
+        w = Core.graphics.getWidth();
+        h = Core.graphics.getHeight();
         Draw.color(Color.valueOf("ff0000"));
         Lines.stroke(3);
+        print("trydraw");
         Lines.polySeg(360, 0, (360/Vars.player.maxHealth())*Vars.player.health(), Vars.player.getX(), Vars.player.getY(), 11, 0);
         Lines.stroke(1);
         Draw.color();
+        Draw.reset();
 			}));
       elem.visible(boolp(()=>!Vars.state.is(GameState.State.menu)));
       elem.update(run(() => {
-
+        elem.setFillParent(true);
+        elem.setBounds(0, 0, Core.graphics.getWidth(), Core.graphics.getHeight());
       }));
       elem.touchable(Touchable.disabled);
 		}
