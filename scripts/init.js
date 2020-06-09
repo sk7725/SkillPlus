@@ -1,5 +1,5 @@
 //var ui = require("ui-lib/library");
-var frag;
+const damagedColor = Color.valueOf("ff9999");
 
 if (typeof(drawrect)== "undefined"){
   const drawrect = method => new Packages.arc.scene.ui.layout.Table.DrawRect(){get : method};
@@ -39,12 +39,27 @@ if(!this.global.skillPlusUI){
 */
 
 const hpring = extend(Packages.arc.scene.style.Drawable, {
+  last:1,
+  hpscl(f){
+  	this.last = Mathf.lerp(this.last, f, 0.1);
+  	return this.last;
+  },
   draw(x, y, w, h){
-    Draw.color(Color.valueOf("ff0000"));
+
     Lines.stroke(8);
     //print("trydraw "+w/2+", "+h/2);
     var cv = Core.input.mouseScreen(Vars.player.getX(),Vars.player.getY());
-    Lines.polySeg(360, 0, 360*(Vars.player.health()/Vars.player.maxHealth()), cv.x, cv.y, 64, 0);
+    Draw.color(Color.darkGray);
+    Lines.circle(cv.x, cv.y, 64);
+    var hp = Vars.player.health()/Vars.player.maxHealth();
+    var scl = this.hpscl(hp);
+    if(hp < scl){
+      Draw.color(damagedColor);
+      Lines.polySeg(360, 360*hp, 360*scl, cv.x, cv.y, 64, 0);
+    }
+    else this.last = hp;
+    Draw.color(Pal.health);
+    Lines.polySeg(360, 0, 360*hp, cv.x, cv.y, 64, 0);
     Lines.stroke(1);
     Draw.color();
     Draw.reset();
