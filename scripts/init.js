@@ -40,25 +40,28 @@ if(!this.global.skillPlusUI){
 
 const hpring = extend(Packages.arc.scene.style.Drawable, {
   last:1,
+  lastframe:0,
   hpscl(f){
   	this.last = Mathf.lerp(this.last, f, 0.1);
   	return this.last;
   },
   draw(x, y, w, h){
-
+    var hp = Vars.player.health()/Vars.player.maxHealth();
+    var scl = this.hpscl(hp);
+    if(hp != scl && hp < 0.9999) this.lastframe = Time.time();
+    var a = (60 - (Time.time() - this.lastframe))/60;
+    if(a <= 0) return;
     Lines.stroke(8);
     //print("trydraw "+w/2+", "+h/2);
     var cv = Core.input.mouseScreen(Vars.player.getX(),Vars.player.getY());
-    Draw.color(Color.darkGray);
+    Draw.color(Color.darkGray, a);
     Lines.circle(cv.x, cv.y, 64);
-    var hp = Vars.player.health()/Vars.player.maxHealth();
-    var scl = this.hpscl(hp);
     if(hp < scl){
-      Draw.color(damagedColor);
+      Draw.color(damagedColor, a);
       Lines.polySeg(360, 360*hp, 360*scl, cv.x, cv.y, 64, 0);
     }
     else this.last = hp;
-    Draw.color(Pal.health);
+    Draw.color(Pal.health, a);
     Lines.polySeg(360, 0, 360*hp, cv.x, cv.y, 64, 0);
     Lines.stroke(1);
     Draw.color();
