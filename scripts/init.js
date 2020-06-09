@@ -1,4 +1,5 @@
 var ui = require("ui-lib/library");
+var frag;
 
 if (typeof(drawrect)== "undefined"){
   const drawrect = method => new Packages.arc.scene.ui.layout.Table.DrawRect(){get : method};
@@ -14,7 +15,7 @@ ui.once(() => {
         var cy = Core.graphics.getHeight()/2;
         Draw.color(Color.valueOf("ff0000"));
         Lines.stroke(3);
-        Lines.polySeg(360, 0, (360/Vars.player.maxHealth())*Vars.player.health(), cx, cy, 11, 0);
+        Lines.polySeg(360, 0, (360/Vars.player.maxHealth())*Vars.player.health(), Vars.player.getX(), Vars.player.getY(), 11, 0);
         Lines.stroke(1);
         Draw.color();
 			}));
@@ -25,6 +26,7 @@ ui.once(() => {
       elem.touchable(Touchable.disabled);
 		}
 	});
+  frag.visible = true;
 	frag.build(Vars.ui.hudGroup);
 
 	// Only hook event to rebuild once
