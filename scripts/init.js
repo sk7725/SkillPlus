@@ -65,8 +65,8 @@ if (!this.global.skillPlusUI) {
 
 	Events.on(EventType.ClientLoadEvent, run(e => {
 		const t = new Table();
-    const d = new Packages.arc.scene.ui.layout.Table.DrawRect();
-    d.draw()
+    //const d = new Packages.arc.scene.ui.layout.Table.DrawRect();
+    //d.draw()
 		t.setFillParent(true);
     t.addImage(hpring);
 		t.visible(boolp(() => Vars.state.state == GameState.State.playing));
