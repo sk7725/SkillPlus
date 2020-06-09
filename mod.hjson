@@ -1,0 +1,7 @@
+name: "skillplus"
+displayName: "[cyan]SkillPlus[] DLC"
+author: "[royal]sk7725[]"
+description: "A [accent]Skill Functionality[] extending Mindustry Mod, for the skills of [cyan]sk7725/Commandblocks.[]"
+version: 0.1
+minGameVersion: 104
+dependencies: ["commandblocks","ui-lib"]
