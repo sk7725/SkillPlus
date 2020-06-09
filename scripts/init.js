@@ -4,7 +4,7 @@ var frag;
 if (typeof(drawrect)== "undefined"){
   const drawrect = method => new Packages.arc.scene.ui.layout.Table.DrawRect(){get : method};
 }
-
+/*
 if(!this.global.skillPlusUI){
   this.global.skillPlusUI = true;
   Events.on(EventType.ClientLoadEvent, run(e => {
@@ -18,7 +18,7 @@ if(!this.global.skillPlusUI){
           h = Core.graphics.getHeight();
           Draw.color(Color.valueOf("ff0000"));
           Lines.stroke(3);
-          print("trydraw "+w/2+", "+h/2);
+          //print("trydraw "+w/2+", "+h/2);
           Lines.polySeg(360, 0, (360/Vars.player.maxHealth())*Vars.player.health(), w/2, h/2, 11, 0);
           Lines.stroke(1);
           Draw.color();
@@ -34,5 +34,37 @@ if(!this.global.skillPlusUI){
   	});
     frag.visible = true;
   	frag.build(Vars.ui.hudGroup);
+	}));
+}
+*/
+var last = 0;
+
+const hpring = () => {
+	var hp = Vars.player.health()/Vars.player.maxHealth();
+	const avg = Mathf.lerp(hp, last, 1/60);
+	last = hp;
+	return avg;
+};
+
+// Prevent adding multiple speedometers
+if (!this.global.skillPlusUI) {
+	this.global.skillPlusUI = true;
+
+	Events.on(EventType.ClientLoadEvent, run(e => {
+		const t = new Table();
+		t.setFillParent(true);
+    t.rect(drawrect((x, y, width, height)=>{
+      Draw.color(Color.valueOf("ff0000"));
+      Lines.stroke(3);
+      //print("trydraw "+w/2+", "+h/2);
+      Lines.polySeg(360, 0, 360*prov(hpring), x+width/2, y+height/2, 11, 0);
+      Lines.stroke(1);
+      Draw.color();
+      Draw.reset();
+    })).grow();
+		t.visible(boolp(() => Vars.state.state == GameState.State.playing));
+		t.defaults().width(Core.graphics.getWidth()).height(Core.graphics.getHeight());
+
+		Core.scene.add(t);
 	}));
 }
