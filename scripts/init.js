@@ -1,5 +1,6 @@
 //var ui = require("ui-lib/library");
 const damagedColor = Color.valueOf("ffa5a5");
+const shieldColor = Color.valueOf("ffb426");
 
 if (typeof(drawrect)== "undefined"){
   const drawrect = method => new Packages.arc.scene.ui.layout.Table.DrawRect(){get : method};
@@ -144,7 +145,7 @@ const hpskillring = extend(Packages.arc.scene.style.Drawable, {
     if(Vars.player.hasEffect(t.global.shieldcomp.small)){
       var shp = t.global.shieldcomp.small._shieldhp[Vars.player.id];
       if(shp > 0){
-        Draw.color(Pal.lightGray, a);
+        Draw.color(shieldColor, a);
         Lines.stroke(radius/2);
         Lines.polySeg(360, 0, shp / 3, cv.x, cv.y, radius*8.5, 0);
       }
@@ -152,7 +153,7 @@ const hpskillring = extend(Packages.arc.scene.style.Drawable, {
     else if(Vars.player.hasEffect(t.global.shieldcomp.large)){
       var shp = t.global.shieldcomp.large._shieldhp[Vars.player.id];
       if(shp > 0){
-        Draw.color(Pal.lightGray, a);
+        Draw.color(shieldColor, a);
         Lines.stroke(radius/2);
         Lines.polySeg(360, 0, shp / 3, cv.x, cv.y, radius*8.5, 0);
       }
