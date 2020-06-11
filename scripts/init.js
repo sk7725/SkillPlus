@@ -146,16 +146,16 @@ const hpskillring = extend(Packages.arc.scene.style.Drawable, {
       var shp = t.global.shieldcomp.small._shieldhp[Vars.player.id];
       if(shp > 0){
         Draw.color(shieldColor, a);
-        Lines.stroke(radius/2);
-        Lines.polySeg(360, 0, shp / 3, cv.x, cv.y, radius*8.5, 0);
+        Lines.stroke(radius/1.8);
+        Lines.polySeg(360, 0, shp / 3, cv.x, cv.y, radius*9.5, 0);
       }
     }
     else if(Vars.player.hasEffect(t.global.shieldcomp.large)){
       var shp = t.global.shieldcomp.large._shieldhp[Vars.player.id];
       if(shp > 0){
         Draw.color(shieldColor, a);
-        Lines.stroke(radius/2);
-        Lines.polySeg(360, 0, shp / 3, cv.x, cv.y, radius*8.5, 0);
+        Lines.stroke(radius/1.8);
+        Lines.polySeg(360, 0, shp / 3, cv.x, cv.y, radius*9.5, 0);
       }
     }
 
