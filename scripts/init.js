@@ -114,7 +114,7 @@ const hpskillring = extend(Packages.arc.scene.style.Drawable, {
 
 
     //var a = (60 - (Time.time() - this.lastframe))/60;
-    var a = 0.1;
+    var a = Core.settings.getInt("chatopacity")/100;
     //if(a <= 0.4) a = 0.4;
     Lines.stroke(radius);
     //print("trydraw "+w/2+", "+h/2);
