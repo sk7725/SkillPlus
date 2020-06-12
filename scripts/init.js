@@ -188,6 +188,6 @@ if (!this.global.skillPlusUI) {
 		//t.defaults().width(Core.graphics.getWidth()).height(Core.graphics.getHeight());
 
 		//Core.scene.add(t);
-    Vars.ui.hudGroup.addChild(t);
+    Vars.ui.hudGroup.addChildAt(0, t);
 	}));
 }
