@@ -187,6 +187,7 @@ if (!this.global.skillPlusUI) {
 		t.visible(boolp(() => Vars.state.state == GameState.State.playing));
 		//t.defaults().width(Core.graphics.getWidth()).height(Core.graphics.getHeight());
 
-		Core.scene.add(t);
+		//Core.scene.add(t);
+    Vars.ui.hudGroup.addChild(t);
 	}));
 }
